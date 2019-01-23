@@ -196,6 +196,19 @@ for (enz in enzyme_range) {
 
 # The model is solved, now is time for visualisation of the heatmap
 
+saving_graph <- function(plot = last_plot(),filename, path = getwd(), device = "jpeg", 
+                         scale = 1, width = NA, height = NA, units = c("in", "cm", "mm"),
+                         dpi = 300, limitsize = TRUE, reminder = FALSE) {
+  
+  ggsave(filename = filename, plot = plot, device = device, path = path, scale = scale, width = width, height = height, units = units,
+         dpi = dpi, limitsize = limitsize)
+  if (reminder == TRUE) {
+    button <- tkmessageBox(title='Warning',message='Do not forget to save the data that produced that graph',type='ok')
+    button <- tclvalue(button)
+  }
+}
+
+
 plot_2D_heatmap = function(df_means, df_sd = NULL, title_base = "Visualising adder in 2D heatmap", name_for_saving, folder_for_concentration_images_strategy, saving = TRUE, x_lab = "(nM)", y_lab = "(µM)", subtitle_here = "GFP") {
   experiment_1 = colnames(df_means)[1]
   experiment_2 = colnames(df_means)[2]
